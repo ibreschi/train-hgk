@@ -1,8 +1,11 @@
 FROM rust:1.61
 
 WORKDIR /app
-COPY ./ /app
+COPY . .
 
-RUN cargo install --path .
+RUN cargo fetch
 
-CMD ["train-app"]
+ARG BUILD
+ENV BUILD=$BUILD
+
+CMD ["/app/run-entrypoint.sh"]
