@@ -1,5 +1,3 @@
-
-use actix_web::web::{Path};
 use actix_web::{HttpResponse};
 
 use crate::constants::{APPLICATION_JSON};

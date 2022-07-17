@@ -1,10 +1,9 @@
 # Training Hockey Goal Keepers
-This project will allow a trainer to prepare a Training (list of excercices) for a training session.
-Each Excercise has one image, one description and a set of Properties.
-One Property categorize the excercice, difficulty, skill type, number of golies, more ...
+This project will allow a trainer to prepare a Training (list of exercises) for a training session.
+Each Exercise has one image, one description and a set of Properties.
+One Property categorize the exercise, difficulty, skill type, number of golies, more ...
 
 # Use Cases:
-
 ## Excercises UCs
 
 ### UC1 excercises page:
@@ -37,7 +36,6 @@ One Property categorize the excercice, difficulty, skill type, number of golies,
 6. The exercice is modified
 
 ## Training UCs
-
 ### UC6 list existing Training:
 1. The Client open the training page
 2. All the existing training are showed in a menu
@@ -54,10 +52,8 @@ One Property categorize the excercice, difficulty, skill type, number of golies,
 3. the Client fills the excercise values (name, description, images, properties)
 
 # Design:
-
 https://hub.qovery.com/guides/tutorial/create-a-blazingly-fast-api-in-rust-part-1/
 https://www.cockroachlabs.com/docs/stable/build-a-rust-app-with-cockroachdb.html
-
 
 Frontend:
 1. ?
@@ -66,14 +62,17 @@ Backend:
 1. Actix Rust framework. Using it as an HTTP server to build our REST API.
 2. Diesel popular ORM in Rust to connect to a PostgreSQL database
 
-# Done:
+# Work
+## Done:
 1. Hello world docker image with Rust
+2. add one health endpoint
+3. dmake style makefile
+4.
 
-# Todo:
+## Todo:
 0. Find place where deploy the code and host the db
 1. Exercices endpoints
 2. Training endpoints
-
 
 # CMDs:
 ```
