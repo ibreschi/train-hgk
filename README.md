@@ -89,12 +89,3 @@ $ d container ls -a | grep db7dd74b557c
 # Run the image
 $ d run -it 4cb30bd83ec0 bash
 ```
-
-## Build base image
-```
-d build -t train-app:base train-app/ --build-arg BUILD="1"
-```
-## Run base image
-```
-d run --name running-train-app -u 0 --rm -t -v ${PWD}/train-app:/app  --entrypoint /app/dev-entrypoint.sh -i train-app:base bash
-```
