@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, NaiveDateTime, Utc, TimeZone};
 use diesel::{Insertable, Queryable};
+use serde::{Deserialize, Serialize};
 
 use uuid::Uuid;
 use std::str::FromStr;
@@ -15,14 +15,14 @@ pub struct Exercise {
 }
 
 impl Exercise {
-    pub fn new() -> Self {
+    pub fn new(message: String) -> Self {
         Self {
             id: Uuid::new_v4().to_string(),
             created_at: Utc::now(),
         }
     }
 
-    pub fn to_db(&self, tweet_id: Uuid) -> ExerciseDB {
+    pub fn to_db(&self) -> ExerciseDB {
         ExerciseDB {
             id: Uuid::from_str(self.id.as_str()).unwrap(),
             created_at: self.created_at.naive_utc()

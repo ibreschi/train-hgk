@@ -8,6 +8,7 @@ use std::{env, io};
 use actix_web::{middleware, App, HttpServer};
 
 mod constants;
+mod response;
 mod exercise;
 mod health;
 mod schema;
