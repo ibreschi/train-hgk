@@ -88,3 +88,9 @@ $ d container ls -a | grep db7dd74b557c
 # Run the image
 $ d run -it 4cb30bd83ec0 bash
 ```
+
+
+## Diesel
+https://diesel.rs/guides/getting-started
+
+cargo install diesel_cli
