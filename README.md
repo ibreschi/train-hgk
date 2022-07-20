@@ -94,3 +94,10 @@ $ d run -it 4cb30bd83ec0 bash
 https://diesel.rs/guides/getting-started
 
 cargo install diesel_cli
+
+
+
+## Curl
+```
+curl -X POST -d '{"message": "This is a tweet"}' -H "Content-type: application/json" http://localhost:9090/exercises
+```

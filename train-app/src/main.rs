@@ -27,6 +27,7 @@ async fn main() -> io::Result<()> {
             // Set up DB pool to be used with web::Data<Pool> extractor
             .data(pool.clone())
             .service(health::health)
+            .service(exercise::view::create)
             .service(exercise::view::list)
         })
         .bind("0.0.0.0:9090")?
