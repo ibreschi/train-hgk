@@ -6,6 +6,7 @@ use diesel::query_dsl::methods::{FilterDsl, LimitDsl, OrderDsl};
 
 use super::model::{Exercise, ExerciseDB};
 use crate::response::Response;
+use crate::db::DBPooledConnection;
 pub type Exercises = Response<Exercise>;
 
 pub fn list_exo(total_exercises: i64, conn: &DBPooledConnection) -> Result<Exercises, Error> {

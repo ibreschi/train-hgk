@@ -1,6 +1,7 @@
 use crate::constants::{APPLICATION_JSON, CONNECTION_POOL_ERROR};
+use crate::db::DBPool;
 
-use actix_web::web::{Data, Json, Path};
+use actix_web::web::{Data, Json};
 use actix_web::{web, HttpResponse};
 
 use super::model::Exercise;
@@ -49,11 +50,10 @@ pub async fn create(exo_req: Json<ExerciseRequest>, pool: Data<DBPool>) -> HttpR
 
 /// find a exercise by its id `/exercises/{id}`
 #[get("/exercises/{id}")]
-pub async fn get(path: Path<(String,)>, pool: Data<DBPool>) -> HttpResponse {
+pub async fn get(web::Path((path,)): web::Path<(String,)>, pool: Data<DBPool>) -> HttpResponse {
     let conn = pool.get().expect(CONNECTION_POOL_ERROR);
-    let my_string = path.0.0.as_str();
     let exercise =
-        web::block(move || find_exo(Uuid::from_str(my_string).unwrap(), &conn)).await;
+        web::block(move || find_exo(Uuid::from_str(path.as_str()).unwrap(), &conn)).await;
 
     match exercise {
         Ok(exercise) => {
@@ -74,12 +74,11 @@ pub async fn get(path: Path<(String,)>, pool: Data<DBPool>) -> HttpResponse {
 
 /// delete a exercise by its id `/exercises/{id}`
 #[delete("/exercises/{id}")]
-pub async fn delete(path: Path<(String,)>, pool: Data<DBPool>) -> HttpResponse {
+pub async fn delete(web::Path((path,)): web::Path<(String,)>, pool: Data<DBPool>) -> HttpResponse {
     // in any case return status 204
     let conn = pool.get().expect(CONNECTION_POOL_ERROR);
-    let my_string = path.0.0.as_str();
 
-    let _ = web::block(move || delete_exo(Uuid::from_str(my_string).unwrap(), &conn)).await;
+    let _ = web::block(move || delete_exo(Uuid::from_str(path.as_str()).unwrap(), &conn)).await;
 
     HttpResponse::NoContent()
         .content_type(APPLICATION_JSON)
