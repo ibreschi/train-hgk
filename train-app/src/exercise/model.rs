@@ -12,6 +12,7 @@ use super::super::schema::exercises;
 pub struct Exercise {
     pub id: String,
     pub created_at: DateTime<Utc>,
+    pub message: String,
 }
 
 impl Exercise {
@@ -19,13 +20,15 @@ impl Exercise {
         Self {
             id: Uuid::new_v4().to_string(),
             created_at: Utc::now(),
+            message,
         }
     }
 
     pub fn to_db(&self) -> ExerciseDB {
         ExerciseDB {
             id: Uuid::from_str(self.id.as_str()).unwrap(),
-            created_at: self.created_at.naive_utc()
+            created_at: self.created_at.naive_utc(),
+            message: self.message.clone(),
         }
     }
 }
@@ -35,6 +38,7 @@ impl Exercise {
 pub struct ExerciseDB {
     pub id: Uuid,
     pub created_at: NaiveDateTime,
+    pub message: String,
 }
 
 impl ExerciseDB {
@@ -42,6 +46,7 @@ impl ExerciseDB {
         Exercise {
             id: self.id.to_string(),
             created_at: Utc.from_utc_datetime(&self.created_at),
+            message: self.message.clone(),
         }
     }
 }

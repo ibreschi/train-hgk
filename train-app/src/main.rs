@@ -28,6 +28,8 @@ async fn main() -> io::Result<()> {
             .data(pool.clone())
             .service(health::health)
             .service(exercise::view::create)
+            .service(exercise::view::delete)
+            .service(exercise::view::get)
             .service(exercise::view::list)
         })
         .bind("0.0.0.0:9090")?

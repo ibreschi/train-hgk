@@ -28,10 +28,24 @@ impl ExerciseRequest {
 
 
 #[get("/exercises")]
-pub async fn list() -> HttpResponse {
+pub async fn list(pool: Data<DBPool>) -> HttpResponse {
+    let conn = pool.get().expect(CONNECTION_POOL_ERROR);
+    let mut exos = web::block(move || list_exo(50, &conn)).await.unwrap();
+
+    // let tweets_with_likes = Tweets {
+    //     results: tweets
+    //         .results
+    //         .iter_mut()
+    //         .map(|t| {
+    //             let _likes = list_likes(Uuid::from_str(t.id.as_str()).unwrap(), &conn).unwrap();
+    //             t.add_likes(_likes.results)
+    //         })
+    //         .collect::<Vec<Tweet>>(),
+    // };
+
     HttpResponse::Ok()
         .content_type(APPLICATION_JSON)
-        .json(Exercise::new("".to_string()))
+        .json(exos)
 }
 
 #[post("/exercises")]
@@ -57,13 +71,13 @@ pub async fn get(web::Path((path,)): web::Path<(String,)>, pool: Data<DBPool>) -
 
     match exercise {
         Ok(exercise) => {
-            let conn = pool.get().expect(CONNECTION_POOL_ERROR);
+            // let conn = pool.get().expect(CONNECTION_POOL_ERROR);
             // let _likes = list_likes(Uuid::from_str(exercise.id.as_str()).unwrap(), &conn).unwrap();
 
             HttpResponse::Ok()
                 .content_type(APPLICATION_JSON)
                 // .json(exercise.add_likes(_likes.results))
-                .json({})
+                .json(exercise)
         }
         _ => HttpResponse::NoContent()
             .content_type(APPLICATION_JSON)

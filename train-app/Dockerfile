@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . .
 
 RUN cargo fetch
+RUN cargo install diesel_cli
 
 ARG BUILD
 ENV BUILD=$BUILD
