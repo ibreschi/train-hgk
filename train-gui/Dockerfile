@@ -3,9 +3,9 @@ FROM rust:1.61
 WORKDIR /app
 COPY . .
 
+RUN cargo install trunk
+RUN rustup target add wasm32-unknown-unknown
 RUN cargo fetch
-RUN cargo install diesel_cli
-RUN cargo install cargo-watch
 
 ARG BUILD
 ENV BUILD=$BUILD

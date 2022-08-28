@@ -56,7 +56,7 @@ https://hub.qovery.com/guides/tutorial/create-a-blazingly-fast-api-in-rust-part-
 https://www.cockroachlabs.com/docs/stable/build-a-rust-app-with-cockroachdb.html
 
 Frontend:
-1. ?
+1. yew
 
 Backend:
 1. Actix Rust framework. Using it as an HTTP server to build our REST API.
